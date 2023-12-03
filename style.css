@@ -18,7 +18,7 @@
 .form{
        background-color: cornsilk;
        margin-top: 20px;
-       width: 37vh;
+       width: 45vh;
        height: 65vh;
        box-shadow: inset;
        border-radius: 30px;
@@ -43,9 +43,9 @@
        background-color: cornsilk;
        border-color: black;
        margin-top: 30px;
-       width: 37vh;
+       width: 45vh;
        margin-left: 39px;
-       height: 16vh;
+       height: 22vh;
        box-shadow: inset;
        border-radius: 30px;
         
@@ -61,9 +61,9 @@
 
 .add-text1{
        border-radius: 30px;
-       margin-left: 15px;
+       margin-left: 9px;
        background-color: burlywood;
-       width: 70px;
+       width: 50px;
        height: 30px;
 }
 
