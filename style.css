@@ -1,6 +1,6 @@
 .Container {
         background-color: rgb(188, 185, 233);
-        height: 100vh;
+        height: 150vh;
         width: 50vh;
         padding: 20px;
     }
@@ -15,14 +15,14 @@
     }
     
 
-.form{
-       background-color: cornsilk;
-       margin-top: 20px;
-       width: 47vh;
-       height: 65vh;
-       box-shadow: inset;
-       border-radius: 30px;
-
+    .form {
+        background-color: cornsilk;
+        margin-top: 20px;
+        width: 46vh; /* Adjusted width to account for margin-right */
+        margin-right: auto;
+        height: 65vh;
+        box-shadow: inset;
+        border-radius: 30px;
     }
     
 
@@ -43,7 +43,7 @@
        background-color: cornsilk;
        border-color: black;
        margin-top: 30px;
-       width: 47vh;
+       width: 45vh;
        margin-left: 40px;
        height: 22vh;
        box-shadow: inset;
