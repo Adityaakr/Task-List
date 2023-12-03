@@ -1,0 +1,107 @@
+.Container {
+        background-color: rgb(188, 185, 233);
+        height: 100vh;
+        width: 50vh;
+        padding: 20px;
+    }
+
+
+    .text-input {
+        margin-top: 10px;
+        margin-left: 10px;
+        border-radius: 50px;
+        padding: 10px;
+        /* Add any other styles as needed to match the "Add a new task" input field */
+    }
+    
+
+.form{
+       background-color: cornsilk;
+       margin-top: 20px;
+       width: 37vh;
+       height: 65vh;
+       box-shadow: inset;
+       border-radius: 30px;
+
+    }
+    
+
+.task1{
+        font-size: 30px;
+        padding: 10px;
+        margin-left: 30px;
+        margin-top: 15px;
+        color: black;
+        opacity: 0.7;
+}
+
+
+
+    
+.task{
+      
+       background-color: cornsilk;
+       border-color: black;
+       margin-top: 30px;
+       width: 37vh;
+       margin-left: 39px;
+       height: 16vh;
+       box-shadow: inset;
+       border-radius: 30px;
+        
+}
+
+.task-list{
+        font-size: 30px;
+        justify-content: center;
+        margin-left: 90px;
+        padding-top: 10px;
+        opacity: 0.7;
+}
+
+.add-text1{
+       border-radius: 30px;
+       margin-left: 15px;
+       background-color: burlywood;
+       width: 70px;
+       height: 30px;
+}
+
+.displayName {
+        background: whitesmoke;
+        margin-left: 60px;
+        margin-right: 120px;
+        margin-top: 50px;
+        font-size: 20px;
+        font-style: italic;
+        gap: 50px;
+    }
+    
+#taskInput{
+        margin-top: 10px;
+        margin-left: 10px;
+        border-radius: 50px;
+        padding: 10px;
+}
+
+.clear-text{
+        border-radius: 30px;
+        background-color: burlywood;
+}
+.add-text{
+        border-radius: 30px;
+        background-color: burlywood;
+}
+
+@media screen and (min-width: 780px) {
+
+        .Container {
+                background-color: rgb(188, 185, 233);
+                height: 100vh;
+                width: 90vh;
+                padding: 40px;
+                margin-left: 150px;
+            }
+        
+        
+}
