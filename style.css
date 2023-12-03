@@ -18,7 +18,7 @@
 .form{
        background-color: cornsilk;
        margin-top: 20px;
-       width: 45vh;
+       width: 47vh;
        height: 65vh;
        box-shadow: inset;
        border-radius: 30px;
@@ -43,8 +43,8 @@
        background-color: cornsilk;
        border-color: black;
        margin-top: 30px;
-       width: 45vh;
-       margin-left: 39px;
+       width: 47vh;
+       margin-left: 40px;
        height: 22vh;
        box-shadow: inset;
        border-radius: 30px;
@@ -61,7 +61,7 @@
 
 .add-text1{
        border-radius: 30px;
-       margin-left: 9px;
+       margin-left: 5px;
        background-color: burlywood;
        width: 50px;
        height: 30px;
@@ -82,6 +82,8 @@
         margin-left: 10px;
         border-radius: 50px;
         padding: 10px;
+        width: 60%;
+        height: 15%;
 }
 
 .clear-text{
