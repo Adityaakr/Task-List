@@ -1,70 +1,123 @@
-As we know -> LocalStorage uses String to store data but we convert by JSON.parse to objects 
+// As we know -> LocalStorage uses String to store data but we convert by JSON.parse to objects 
 
-difference b/w using String and Objects
+// difference b/w using String and Objects
 
-//1// Using Objects
+// //1// Using Objects
 
-// Storing tasks as an array of objects
-const tasks = [
-  { id: 1, description: 'Complete assignment', status: 'Incomplete' },
-  { id: 2, description: 'Read a book', status: 'Complete' }
-];
+// // Storing tasks as an array of objects
+// const tasks = [
+//   { id: 1, description: 'Complete assignment', status: 'Incomplete' },
+//   { id: 2, description: 'Read a book', status: 'Complete' }
+// ];
 
-// Storing in localStorage
-localStorage.setItem('tasks', JSON.stringify(tasks));
+// // Storing in localStorage
+// localStorage.setItem('tasks', JSON.stringify(tasks));
 
-// Retrieving and manipulating tasks
-const retrievedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-retrievedTasks.push({ id: 3, description: 'Exercise', status: 'Incomplete' });
+// // Retrieving and manipulating tasks
+// const retrievedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+// retrievedTasks.push({ id: 3, description: 'Exercise', status: 'Incomplete' });
 
-//2// using string
+// //2// using string
 
-// Storing tasks as a string
-const tasksString = '[{"id":1,"description":"Complete assignment","status":"Incomplete"},
-{ "id":2,"description":"Read a book","status":"Complete"}]';
+// // Storing tasks as a string
+// const tasksString = '[{"id":1,"description":"Complete assignment","status":"Incomplete"},
+// { "id":2,"description":"Read a book","status":"Complete"}]';
 
-// Storing in localStorage
-localStorage.setItem('tasks', tasksString);
+// // Storing in localStorage
+// localStorage.setItem('tasks', tasksString);
 
-// Retrieving and manipulating tasks
-const retrievedTasksString = localStorage.getItem('tasks') || '[]';
-const retrievedTasksArray = JSON.parse(retrievedTasksString);
-retrievedTasksArray.push({ id: 3, description: 'Exercise', status: 'Incomplete' });
+// // Retrieving and manipulating tasks
+// const retrievedTasksString = localStorage.getItem('tasks') || '[]';
+// const retrievedTasksArray = JSON.parse(retrievedTasksString);
+// retrievedTasksArray.push({ id: 3, description: 'Exercise', status: 'Incomplete' });
 
 
 //so whats the difference//
 
-Key Differences:
+// Key Differences:
 
-Readability:
+// Readability:
 
-Objects: More human-readable due to the structured format with key-value pairs.
-Strings: Less readable, especially when dealing with complex data structures.
-Manipulation:
+// Objects: More human-readable due to the structured format with key-value pairs.
+// Strings: Less readable, especially when dealing with complex data structures.
+// Manipulation:
 
-Objects: Direct manipulation of properties is possible.
-Strings: Requires conversion to an array for manipulation, which involves additional steps.
-Type Safety:
+// Objects: Direct manipulation of properties is possible.
+// Strings: Requires conversion to an array for manipulation, which involves additional steps.
+// Type Safety:
 
-Objects: Ensures a consistent structure for each task.
-Strings: Potential for data type mismatches if not converted back to a structured format.
+// Objects: Ensures a consistent structure for each task.
+// Strings: Potential for data type mismatches if not converted back to a structured format.
 
 
 //writing same thing in html and css but in js example
 
 //1   const taskInputField = document.createElement('input');
-      taskInputField.type = 'text';
-      taskInputField.value = 'tasktext';
-      taskInputField.className = 'text-input';
-      tastInputField.setAttribute("readonly", 'true');
+//       taskInputField.type = 'text';
+//       taskInputField.value = 'tasktext';
+//       taskInputField.className = 'text-input';
+//       tastInputField.setAttribute("readonly", 'true');
 
-<!-- //2   <input 
-             type="text"
-             class="text"
-             id="taskInput"
-             placeholder="My new Task"
-             readonly />
+// <!-- //2   <input 
+//              type="text"
+//              class="text"
+//              id="taskInput"
+//              placeholder="My new Task"
+//              readonly />
           
-            <button class="clear-text">Edit</button>
-            <button class="add-text">Delete</button>       -->
+//             <button class="clear-text">Edit</button>
+//             <button class="add-text">Delete</button>       -->
      
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This concept is related to delete button 
+
+//1) We are just removing the visual representaion as-
+
+// taskListContainer.removeChild(newTaskContainer):
+
+// 2) tasks = tasks.filter(taskItem => taskItem !== taskText):
+// so same in this case like where taskText wil be written should be removed right?? if delete button is clicked
+
+//Super Simple Example :-
+
+// If a task's text is not equal to taskText, it means it's a task you want to keep in the array.
+// If a task's text is equal to taskText, it means it's the task you want to remove, and the condition evaluates to false for that task.
+
+
+
+// Extra Info
+
+// In the context of the addTask function, when you create a new task container 
+// and set its text based on the input value, the( taskText variable holds the value)
+// of that specific task. Therefore, when you later click the "Delete" button for that
+// task, it will use the corresponding taskText value to filter out and remove that specific task
+// from both the visual representation and the data stored in localStorage.
+
+// Each task container( operates independently in this scenario), and the taskText associated
+// with each task container ensures that the correct task is targeted for removal when the "Delete" button is clicked.
+
+
+
+
+// This line updates the underlying data structure (the tasks array in this case) 
+// by removing the task identified by taskText. It ensures that when you reload 
+// the page or interact with the data programmatically, the removed task is not present in the data.
+
+
+// Reasoning :- 
+// If a task's text is not equal to taskText, it means it's a task you want to keep in the array.
+// If a task's text is equal to taskText, it means it's the task you want to remove, and the condition evaluates to false for that task.
+
+
+// If a task's text is equal to taskText, it means it's the task you want to remove.
+// The condition taskItem !== taskText evaluates to false for that task, so it is excluded from the new array.
+// For all other tasks (those not equal to taskText), the condition evaluates to true, and 
+// they are included in the new array.
+
+// Explain-
+
+//it will get disappeared visually but when page will load, It is still present in localStorage
+// so we have to use this tasks = tasks.filter(taskItem => taskItem !== taskText); to remove it completely
