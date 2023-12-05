@@ -121,3 +121,58 @@
 
 //it will get disappeared visually but when page will load, It is still present in localStorage
 // so we have to use this tasks = tasks.filter(taskItem => taskItem !== taskText); to remove it completely
+
+
+
+
+// for each and .map
+
+// While the two code snippets have similar functionality, they have a key difference:
+
+// 1. **`tasks.forEach(...)`**:
+//    ```javascript
+//    tasks.forEach(taskText => {
+//        createTaskContainer(taskText, taskListContainer);
+//    });
+//    ```
+//    This code uses `forEach` to iterate over each element in the `tasks` array and applies the `createTaskContainer` function to each element.
+//     However, it doesn't create a new array. It's generally used for side effects (e.g., modifying the DOM, logging, etc.) 
+//     rather than producing a new array.
+
+// 2. **`const taskContainers = tasks.map(...)`**:
+//    ```javascript
+//    const taskContainers = tasks.map(taskText => createTaskContainer(taskText, taskListContainer));
+//    ```
+//    This code uses `map` to iterate over each element in the `tasks` array and creates a new array (`taskContainers`) 
+//    by applying the `createTaskContainer` function to each element. It is often used when you want to transform each 
+//    element and produce a new array based on those transformations.
+
+// If you're only interested in performing some action for each task without creating a new array, the `forEach` approach is appropriate.
+//  If you want to create a new array based on the tasks (e.g., an array of task containers), then the `map` approach is more suitable.
+// In summary, the choice between `forEach` and `map` depends on whether you need a new array as the result of the operation.  //
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Differences
+
+// .map always create a new array and forEach doesnt
+// example 
+// const numbers = [1, 2, 3, 4];
+
+// // Double each number and create a new array
+// const doubledNumbers = numbers.map(num => num * 2);
+
+// console.log(doubledNumbers); // Output: [2, 4, 6, 8]
+
+// forEach
+
+//example 
+
+// const tasks = ['Task 1', 'Task 2', 'Task 3'];
+
+// // Log each task to the console without creating a new array
+// tasks.forEach(task => console.log(task));
+
+
+// When using forEach, you don't create a new array based on transformations;
+// instead, you typically perform some action or side effect on each element without generating a new array
+

@@ -136,7 +136,7 @@ var taskListContainer = document.getElementById("taskListContainer");
 loadTasksFromLocalStorage();
 
 // Event listener for the form to prevent default form submission
-document.getElementById("taskForm").addEventListener("submit", function (event) {
+document.addEventListener("submit", function (event) {
     event.preventDefault();
     addTask();
 });
