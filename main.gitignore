@@ -1,0 +1,279 @@
+//step 0 Creating a Common function to create a new Task Conatiner 
+// Advantage - for newtask + when task will load ( from localstorage) it will be easy to get saved data
+// not writing same code again
+
+   function createTaskContainer(taskText, taskListContainer, tasks) {
+
+
+// - Create a new task container with input field, "Edit" button, and "Delete" button
+// 1) Creating new Container for Task and Buttons
+// Logic - 
+// flow is like ->
+// -> Create a Container as newTaskContainer
+// -> then adding dynamically input (placeholder) delete and edit button by giving diff diff classname
+// -> then adding features -> EDit button removing readonly as !== etc
+// -> Delete Button - as removing 
+// -> taskListContainer(that whole conatiner where all the task will  be stored).removeChild(newTaskContainer)
+// -> add child or appendChild as taskInputField or edit and delete button
+// -> then we want to show the operations on taskListContainer selected by getElementbyId
+
+      const newTaskContainer = document.createElement('div');
+      newTaskContainer.className = 'form-task'; //its like creating the container for other components
+
+
+
+// 2) Creating new input field for the task 
+// creating place where the task will be added.
+       
+      const taskInputField = document.createElement('input');
+      taskInputField.type = 'text';
+      taskInputField.value = taskText;
+      taskInputField.className = 'text-input';
+      taskInputField.setAttribute("readonly", 'true');
+     
+
+
+
+
+// - Add event listeners to "Edit" and "Delete" buttons to handle editing and deletion
+
+//A) Creating a EDIT Button
+
+      const editButton = document.createElement('button');
+      editButton.className = 'clear-text';
+      editButton.innerHTML = 'Edit';// 'Edit' is written inside the button
+      editButton.onclick = function (){
+      //converting readOnly to Edit form
+      taskInputField.readOnly = !taskInputField.readOnly;
+      updateLocalStorage(); //updating localstore when task is edited
+}
+
+
+//B) creating a Delete button
+    
+     const deleteButton = document.createElement('button');
+     deleteButton.className = 'clear-text'
+     deleteButton.innerHTML = 'Delete';
+     deleteButton.onclick = function (){
+
+     // remove the (entire task container) when the 'Delete Button is clicked'
+     //the container that we created when add task will be clicked
+     //remember this only removes the visual representation of container but still actual data and consistency
+     // we need tasks.filter etc etc
+
+     taskListContainer.removeChild(newTaskContainer)
+
+     // ~> //remove tasks from tasks array
+     //taskItem is a temporary variable used to represent each individual task in the array during the filtering process.
+     // You can think of it as a placeholder for each element in the tasks array while the filter is being applied.
+
+     //Explain - 
+     // The filter method goes through each task in the tasks array.
+     // For each task, the arrow function checks if it is not equal to taskText.
+     // If a task is not equal to taskText, it is included in the new array.
+     // The tasks variable is then reassigned to this new array, effectively updating it with the filtered tasks.
+     tasks = tasks.filter( task => task !== taskInputField.value);
+
+
+     //save updated task from array to localstorage
+       updateLocalStorage();
+
+}
+
+
+
+// - Add the new input field and button to the task container
+// - Here, newTaskContainer is a container element that you've created dynamically using JavaScript.
+// - using the appendChild method to add three child elements to newTaskContainer
+// - newTaskContainer as a placeholder
+
+
+
+// Same-Thing is Written in Html 
+// <div class="form-task">
+// <input type="text" class="text-input" readonly value="Task Text">
+// <button class="clear-text">Edit</button>
+// <button class="add-text">Delete</button>
+// </div>
+
+
+       newTaskContainer.appendChild(taskInputField);
+       newTaskContainer.appendChild(editButton);
+       newTaskContainer.appendChild(deleteButton);
+     
+
+       taskListContainer.appendChild(newTaskContainer);
+
+}
+
+
+
+// Step 1: Function to add a new task
+
+function newTask(){
+        
+        
+        //task that a person is going to write 
+        const taskInput = document.getElementById("taskInput")
+    
+
+
+
+        //task that he is going to write will have some value
+        // - Get the task text from the input field
+        // storing the value entered by user inside const tasktext
+        const taskText = taskInput.value; 
+
+
+
+// - Check if the input is not empty -> if else statement
+
+        if (taskText.trim() === ''){
+          alert('Please add a task!');
+          return;
+        }
+
+
+
+
+// - Retrieve existing tasks from localStorage or initialize an empty array
+// - tasks here represents array of TASKS
+// - parses the JSON string into a JavaScript object
+
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [] //|| [] as a fallback or default value
+
+
+
+
+//Explain Concept-
+
+//{In JavaScript, data stored in `localStorage` is in string format. 
+//`JSON.parse` is used to convert this string back into a JavaScript object.
+
+//The need to convert the string to an object using JSON.parse is because 
+//{localStorage stores data as strings.} If you want to work with the data as a JavaScript object (or array),.
+
+//you need to convert it from its string representation. Using JSON.parse
+//whats the need to converting to Objects??
+
+//while it's possible to work with data as a string, 
+//converting it to an object often makes the code more readable,
+// maintainable, and provides easier access to the functionality that 
+// JavaScript offers for working with structured data.}
+
+
+
+
+// - Add the new task to the tasks array
+
+       tasks.push(taskText);
+
+
+
+
+// - Save the updated tasks array to localStorage
+//- effective way to store structured data (like an array of objects) in the localStorage of a web browser.
+//JSON.stringify function in JavaScript is used to convert a JavaScript object into a JSON-formatted string.
+
+       localStorage.setItem('tasks', JSON.stringify(tasks));
+
+       const taskListContainer = document.getElementById('taskListContainer');
+
+       //calling the function createTaskContainer
+       createTaskContainer(taskText, taskListContainer,tasks);
+
+
+       taskInput.value = '';
+
+        // Update local storage after creating a new task container
+         updateLocalStorage();
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+       // Step 3: Function to load tasks from localStorage on page load
+
+       function loadTasks() {
+       const taskListContainer = document.getElementById('taskListContainer');
+       const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+       // explain- 
+       // this code is iterating over an array of tasks (tasks) using forEach, 
+       // and for each task, it's calling the createTaskContainer function with the task
+       // text and a container reference (taskListContainer). The purpose of this code is 
+       // likely to create and add task containers to a list or container in a web page or application.
+
+       // forEach: This is a method available for arrays in JavaScript. 
+       // It iterates over each element in the array and executes a provided function once for each array element.
+
+       // taskText: This is a parameter of the function defined inside forEach. 
+       // It represents the current element (task) being processed in the iteration.
+   
+
+
+       // alternative way-
+       // const taskContainers = tasks.map(taskText => createTaskContainer(taskText, taskListContainer));
+
+       tasks.forEach(taskText => {
+           createTaskContainer(taskText, taskListContainer, tasks);
+       });
+
+       updateLocalStorage();
+}
+       
+// Step 2: Function to update localStorage with the latest tasks
+
+// Explain -
+
+       function updateLocalStorage() {
+       // - Get the current tasks from the task list container
+       // - Update the tasks array with the latest values
+       // - Save the updated tasks array to localStorage
+
+
+
+       // Get the task list container element from the DOM
+       const taskListContainer = document.getElementById('taskListContainer');
+   
+
+
+       // Explain - 
+       // taskListContainer is a reference to an HTML element (presumably a container) that contains child elements.
+       // taskListContainer already has -
+       // 1) taskInputField, editButton , deleteButton
+       // so everytime selecting editbutton or deletebutton ->  we are using tasklistconatiner.children right
+
+
+
+       // Array.from(taskListContainer.children):
+       // Converts the collection of child elements inside taskListContainer into an array.
+       const tasks = Array.from(taskListContainer.children).map(container => {
+           // For each task container, get the value of the first child (the task input field)
+           // .map(container => ...):
+           //Iterates through each element in the array, where each element represents a task container.
+           //The container parameter is a reference to the current task container in the iteration.
+
+
+
+           // so we are using [0] because we map func to iterate from first child
+           return container.children[0].value;
+       });
+   
+       // Convert the tasks array to a JSON-formatted string and save it to localStorage
+       localStorage.setItem('tasks', JSON.stringify(tasks));
+   }
+
+
+
+     
+       // Event listener for page load
+       // Call the function to load tasks from localStorage on page load
+       window.addEventListener('DOMContentLoaded', function () {
+       loadTasks();
+   });
+   
+}
+
+
+
+

@@ -20,7 +20,7 @@
         margin-top: 20px;
         width: 46vh; /* Adjusted width to account for margin-right */
         margin-right: auto;
-        height: 110vh;
+        height: 65vh;
         box-shadow: inset;
         border-radius: 30px;
     }
@@ -89,10 +89,12 @@
 .clear-text{
         border-radius: 30px;
         background-color: burlywood;
+        margin-left: 5px;
 }
 .add-text{
         border-radius: 30px;
         background-color: burlywood;
+        margin-left: 8px;
 }
 
 @media screen and (min-width: 780px) {
