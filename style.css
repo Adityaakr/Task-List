@@ -10,6 +10,8 @@
         margin-top: 10px;
         margin-left: 10px;
         border-radius: 50px;
+        width: 15px;
+        height: auto;
         padding: 10px;
         /* Add any other styles as needed to match the "Add a new task" input field */
     }
