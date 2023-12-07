@@ -27,6 +27,7 @@ function createTaskElement(taskText) {
         deleteButton.onclick = function () {
             taskListContainer.removeChild(taskContainer);
             tasks = tasks.filter(taskItem => taskItem !== taskText);
+
             updateLocalStorage();
         };
     
@@ -41,14 +42,18 @@ function createTaskElement(taskText) {
     // Function to add a new task
     function addTask() {
         // Get the input value from the "Add a new task" input field
-        var taskInput = document.getElementById("taskInput");
+        var taskInput = document.getElementById('taskInput'); // Corrected method name
         var taskText = taskInput.value;
     
-        // Check if the input is empty
-        if (taskText.trim() === "") {
-            alert("Please enter a task!");
+        // Check if the input is empty and show an alert if necessary
+        if (taskText.trim() === '') {
+            alert('Please enter a value');
             return;
         }
+    
+        // Rest of your code...
+    
+    
     
         // Retrieve tasks from localStorage or initialize an empty array
         var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -69,6 +74,9 @@ function createTaskElement(taskText) {
     
     // Load tasks from localStorage on page load
     function loadTasksFromLocalStorage() {
+
+        // Jab aap webpage ko phir se load karte hain, tab loadTasksFromLocalStorage function ka istemal hota hai. 
+
         // Get the task list container where tasks will be added
         var taskListContainer = document.getElementById("taskListContainer");
     
@@ -85,23 +93,40 @@ function createTaskElement(taskText) {
         });
     }
     
-    // Function to update localStorage with the latest tasks
-    function updateLocalStorage() {
-        tasks = Array.from(taskListContainer.children).map(container => {
-            return container.firstChild.value;
-        });
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
-    
-    // Get the task list container where tasks will be added
-    var taskListContainer = document.getElementById("taskListContainer");
-    
-    // Call the function to load tasks from localStorage on page load
-    loadTasksFromLocalStorage();
-    
-    // Event listener for the form to prevent default form submission
-    document.getElementById("taskForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        addTask();
+ // Function to update tasks in localStorage
+function updateLocalStorage() {
+
+    //updateLocalStorage function:
+   //Kaam (Work): Yeh function webpage par moujood tasks ko localStorage mein update karta hai.
+
+
+
+
+    // Get an array of task descriptions from taskListContainer
+    //Array.from to convert a collection of HTML elements into an array, 
+    //and then it uses the map function to extract the values of the first child nodes of each element.
+
+    //return the value from taskListContainer.children (maybe value will change) kyuki update toh whi krni hai
+    // return -> .setItem
+    tasks = Array.from(taskListContainer.children).map(container => {
+        return container.firstChild.value;
     });
-    
+
+    // Save the array of tasks in localStorage as a JSON string
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Get the task list container element where tasks will be added
+var taskListContainer = document.getElementById("taskListContainer");
+
+// Call the function to load tasks from localStorage on page load
+loadTasksFromLocalStorage();
+
+// Event listener for the form to prevent default form submission
+document.addEventListener("submit", function (event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Call the addTask function to handle the form submission
+    addTask();
+});
